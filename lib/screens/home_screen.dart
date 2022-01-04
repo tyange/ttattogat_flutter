@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/calendar.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -22,6 +24,7 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      body: const Calendar(),
     );
   }
 }
