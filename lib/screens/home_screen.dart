@@ -12,7 +12,15 @@ class HomeScreen extends StatelessWidget {
           tooltip: 'Navigation menu',
           onPressed: null,
         ),
-        title: const Text("따로또같이"),
+        title: const Text(
+          "따로또같이",
+          style: TextStyle(
+            color: Colors.black87,
+            fontFamily: 'Himnae',
+            fontSize: 20,
+          ),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
     );
   }
