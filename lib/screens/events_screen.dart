@@ -1,25 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:ttattogat/models/event.dart';
-import 'package:ttattogat/widgets/event_item.dart';
+
+import '../models/day.dart';
+import '../models/event.dart';
+import '../widgets/day_item.dart';
 
 class EventsScreen extends StatelessWidget {
   EventsScreen({Key? key}) : super(key: key);
 
-  final List<Event> events = [
-    Event(
-      id: "e1",
+  final List<Day> days = [
+    Day(
       dateTime: DateTime.now(),
-      title: "first-event",
+      events: [
+        Event(
+          id: "e11",
+          date: DateTime.now(),
+          amount: 11231,
+          title: "",
+        ),
+        Event(
+          id: "e12",
+          date: DateTime.now(),
+          amount: 11231,
+          title: "",
+        ),
+        Event(
+          id: "e13",
+          date: DateTime.now(),
+          amount: 11231,
+          title: "",
+        ),
+      ],
+      title: "",
     ),
-    Event(
-      id: "e2",
+    Day(
       dateTime: DateTime.now(),
-      title: "second-event",
+      events: [
+        Event(
+          id: "e21",
+          date: DateTime.now(),
+          amount: 11231,
+          title: "second",
+        ),
+      ],
+      title: "",
     ),
-    Event(
-      id: "e3",
+    Day(
       dateTime: DateTime.now(),
-      title: "third-event",
+      events: [
+        Event(
+          id: "e31",
+          date: DateTime.now(),
+          amount: 11231,
+          title: "third",
+        ),
+      ],
+      title: "",
     ),
   ];
 
@@ -43,11 +78,41 @@ class EventsScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Column(
-        children: events
+        children: days
             .map(
               (e) => Card(
                 child: Row(
-                  children: <Widget>[Text(e.title)],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            e.dateTime.toString(),
+                          ),
+                          Text(
+                            e.title,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 15,
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        '₩ ${e.events.fold(0, (int previousValue, element) => previousValue + element.amount)}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             )

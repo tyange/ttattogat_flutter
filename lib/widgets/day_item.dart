@@ -10,7 +10,6 @@ class EventItem extends StatelessWidget {
       child: Card(
         child: Row(
           children: <Widget>[
-
           ],
         ),
       ),

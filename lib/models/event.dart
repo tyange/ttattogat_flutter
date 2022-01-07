@@ -1,11 +1,13 @@
 class Event {
   final String id;
-  final DateTime dateTime;
   final String title;
+  final int amount;
+  final DateTime date;
 
   Event({
     required this.id,
-    required this.dateTime,
     required this.title,
+    required this.amount,
+    required this.date,
   });
 }
