@@ -9,7 +9,7 @@ class EventsScreen extends StatelessWidget {
 
   final List<Day> days = [
     Day(
-      dateTime: DateTime.now(),
+      dateTime: DateTime(2022, 01, 01),
       events: [
         Event(
           id: "e11",
@@ -33,7 +33,7 @@ class EventsScreen extends StatelessWidget {
       title: "",
     ),
     Day(
-      dateTime: DateTime.now(),
+      dateTime: DateTime(2022, 01, 02),
       events: [
         Event(
           id: "e21",
@@ -41,11 +41,17 @@ class EventsScreen extends StatelessWidget {
           amount: 11231,
           title: "second",
         ),
+        Event(
+          id: "e22",
+          date: DateTime.now(),
+          amount: 10000,
+          title: "second",
+        ),
       ],
       title: "",
     ),
     Day(
-      dateTime: DateTime.now(),
+      dateTime: DateTime(2022, 01, 03),
       events: [
         Event(
           id: "e31",
@@ -79,43 +85,10 @@ class EventsScreen extends StatelessWidget {
       ),
       body: Column(
         children: days
-            .map(
-              (e) => Card(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            e.dateTime.toString(),
-                          ),
-                          Text(
-                            e.title,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 15,
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        '₩ ${e.events.fold(0, (int previousValue, element) => previousValue + element.amount)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
+            .map((day) => DayItem(
+                  key: ValueKey(day.dateTime),
+                  day: day,
+                ))
             .toList(),
       ),
     );
