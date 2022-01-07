@@ -8,9 +8,29 @@ class DayItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Card(
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        width: 390,
+        margin: const EdgeInsets.only(bottom: 15),
+        padding: const EdgeInsets.all(2),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+          border: Border.all(
+            color: Colors.black26,
+            width: 0.5,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          boxShadow: const [
+            BoxShadow(
+                color: Colors.black12,
+                spreadRadius: 0.1,
+                blurRadius: 2,
+                offset: Offset(3, 2))
+          ],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

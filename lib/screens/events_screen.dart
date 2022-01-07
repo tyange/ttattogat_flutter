@@ -81,15 +81,16 @@ class EventsScreen extends StatelessWidget {
             fontSize: 20,
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        shadowColor: const Color.fromRGBO(0, 0, 0, 0.5),
       ),
-      body: Column(
-        children: days
-            .map((day) => DayItem(
-                  key: ValueKey(day.dateTime),
-                  day: day,
-                ))
-            .toList(),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 30),
+        child: Column(
+          children: days
+              .map((day) => DayItem(key: ValueKey(day.dateTime), day: day))
+              .toList(),
+        ),
       ),
     );
   }

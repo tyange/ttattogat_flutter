@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: const ColorScheme(
           primary: Color.fromRGBO(255, 196, 61, 1),
           error: Color.fromRGBO(224, 122, 95, 1),
-          background: Color.fromRGBO(241, 250, 238, 1),
+          background: Color.fromRGBO(250, 249, 249, 1),
           onPrimary: Color.fromRGBO(255, 183, 3, 1),
           onError: Color.fromRGBO(214, 40, 40, 1),
           onSecondary: Color.fromRGBO(251, 133, 0, 1),
