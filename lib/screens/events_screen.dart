@@ -69,6 +69,41 @@ class _EventsScreenState extends State<EventsScreen> {
     ),
   ];
 
+  late DateTime _selectedDate;
+
+  void _showAddNewEvent(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: Card(
+            child: Container(
+              child: Text("add new event"),
+            ),
+          ),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      firstDate: DateTime(1990),
+      lastDate: DateTime(2100, 12, 31),
+      initialDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,19 +119,12 @@ class _EventsScreenState extends State<EventsScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {
-              showDatePicker(
-                context: context,
-                firstDate: DateTime(1990),
-                lastDate: DateTime(2100, 12, 31),
-                initialDate: DateTime.now(),
-              );
-            },
+            onPressed: () => _showAddNewEvent(context),
             icon: const Icon(Icons.add),
             color: Colors.black38,
           )
         ],
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         // shadowColor: const Color.fromRGBO(0, 0, 0, 0.5),
       ),
       body: SingleChildScrollView(
