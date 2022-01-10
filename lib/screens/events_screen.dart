@@ -4,9 +4,14 @@ import '../models/day.dart';
 import '../models/event.dart';
 import '../widgets/day_item.dart';
 
-class EventsScreen extends StatelessWidget {
-  EventsScreen({Key? key}) : super(key: key);
+class EventsScreen extends StatefulWidget {
+  const EventsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<EventsScreen> createState() => _EventsScreenState();
+}
+
+class _EventsScreenState extends State<EventsScreen> {
   final List<Day> days = [
     Day(
       dateTime: DateTime(2022, 01, 01),
@@ -69,20 +74,30 @@ class EventsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const IconButton(
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.people),
           tooltip: 'Navigation menu',
           onPressed: null,
         ),
-        title: const Text(
+        title: Text(
           "따로또같이",
-          style: TextStyle(
-            color: Colors.black87,
-            fontFamily: 'Himnae',
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.headline6,
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              showDatePicker(
+                context: context,
+                firstDate: DateTime(1990),
+                lastDate: DateTime(2100, 12, 31),
+                initialDate: DateTime.now(),
+              );
+            },
+            icon: const Icon(Icons.add),
+            color: Colors.black38,
+          )
+        ],
         backgroundColor: Theme.of(context).colorScheme.background,
-        shadowColor: const Color.fromRGBO(0, 0, 0, 0.5),
+        // shadowColor: const Color.fromRGBO(0, 0, 0, 0.5),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30),
