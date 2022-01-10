@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       home: EventsScreen(),
       theme: ThemeData(
           // Define the default brightness and colors.
-          colorScheme: const ColorScheme.light(
-            primary: Colors.amber,
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.amber,
           )
               .copyWith(secondary: Colors.indigo[100])
               .copyWith(error: Colors.redAccent)
