@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/day.dart';
 import '../models/event.dart';
 import '../widgets/day_item.dart';
+import '../widgets/new_event.dart';
 
 class EventsScreen extends StatefulWidget {
   const EventsScreen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  final List<Day> days = [
+  final List<Day> _days = [
     Day(
       dateTime: DateTime(2022, 01, 01),
       events: [
@@ -69,7 +70,24 @@ class _EventsScreenState extends State<EventsScreen> {
     ),
   ];
 
-  late DateTime _selectedDate;
+  void _addNewEvent(
+    String eventTitle,
+    int eventAmount,
+    DateTime chosenDate,
+  ) {
+    final newEvent = Day(title: "", dateTime: chosenDate, events: [
+      Event(
+        amount: eventAmount,
+        title: eventTitle,
+        date: chosenDate,
+        id: DateTime.now().toString(),
+      )
+    ]);
+
+    setState(() {
+      _days.add(newEvent);
+    });
+  }
 
   void _showAddNewEvent(BuildContext ctx) {
     showModalBottomSheet(
@@ -78,30 +96,14 @@ class _EventsScreenState extends State<EventsScreen> {
         return GestureDetector(
           onTap: () {},
           child: Card(
-            child: Container(
-              child: Text("add new event"),
+            child: NewEvent(
+              addEvent: _addNewEvent,
             ),
           ),
           behavior: HitTestBehavior.opaque,
         );
       },
     );
-  }
-
-  void _presentDatePicker() {
-    showDatePicker(
-      context: context,
-      firstDate: DateTime(1990),
-      lastDate: DateTime(2100, 12, 31),
-      initialDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
   }
 
   @override
@@ -130,7 +132,7 @@ class _EventsScreenState extends State<EventsScreen> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(
-          children: days
+          children: _days
               .map((day) => DayItem(key: ValueKey(day.dateTime), day: day))
               .toList(),
         ),
