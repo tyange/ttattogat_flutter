@@ -18,9 +18,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           // Define the default brightness and colors.
           colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.amber,
+            primarySwatch: Colors.green,
           )
-              .copyWith(secondary: Colors.indigo[100])
+              .copyWith(primary: Colors.green[600])
+              .copyWith(secondary: Colors.indigo[900])
               .copyWith(error: Colors.redAccent)
               .copyWith(
                 background: Colors.white,
