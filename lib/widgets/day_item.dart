@@ -1,10 +1,14 @@
+import 'package:intl/intl.dart';
+
 import 'package:flutter/material.dart';
 import 'package:ttattogat/models/day.dart';
 
 class DayItem extends StatelessWidget {
   final Day day;
+  Function addDayEvent;
 
-  const DayItem({Key? key, required this.day}) : super(key: key);
+  DayItem({Key? key, required this.day, required this.addDayEvent})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +44,28 @@ class DayItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    day.dateTime.toString(),
-                  ),
+                  Row(children: <Widget>[
+                    Text(
+                      DateFormat.yMd().format(day.dateTime),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: const <Widget>[
+                          Icon(
+                            Icons.add,
+                            size: 10,
+                          ),
+                          Text(
+                            "이벤트 추가",
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ]),
                   Text(
                     day.title,
                   ),

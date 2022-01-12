@@ -53,7 +53,8 @@ class _NewEventState extends State<NewEvent> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Card(
+      child: Container(
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: <Widget>[
             TextField(

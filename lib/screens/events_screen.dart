@@ -95,10 +95,8 @@ class _EventsScreenState extends State<EventsScreen> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: Card(
-            child: NewEvent(
-              addEvent: _addNewEvent,
-            ),
+          child: NewEvent(
+            addEvent: _addNewEvent,
           ),
           behavior: HitTestBehavior.opaque,
         );
@@ -122,7 +120,7 @@ class _EventsScreenState extends State<EventsScreen> {
         actions: <Widget>[
           IconButton(
             onPressed: () => _showAddNewEvent(context),
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.event),
             color: Colors.black38,
           )
         ],
@@ -133,7 +131,11 @@ class _EventsScreenState extends State<EventsScreen> {
         padding: const EdgeInsets.symmetric(vertical: 30),
         child: Column(
           children: _days
-              .map((day) => DayItem(key: ValueKey(day.dateTime), day: day))
+              .map((day) => DayItem(
+                    key: ValueKey(day.dateTime),
+                    day: day,
+                    addDayEvent: _addNewEvent,
+                  ))
               .toList(),
         ),
       ),
