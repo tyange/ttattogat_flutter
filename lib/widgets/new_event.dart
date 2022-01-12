@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewEvent extends StatefulWidget {
-  final Function addEvent;
+  DateTime? preSelectedDate;
+  final Function addNewDay;
+  final Function addNewEvent;
 
-  const NewEvent({
+  NewEvent({
     Key? key,
-    required this.addEvent,
+    required this.preSelectedDate,
+    required this.addNewDay,
+    required this.addNewEvent,
   }) : super(key: key);
 
   @override
@@ -16,6 +21,12 @@ class _NewEventState extends State<NewEvent> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
+
+  @override
+  void initState() {
+    _selectedDate = widget.preSelectedDate;
+    super.initState();
+  }
 
   void _presentDatePicker() {
     showDatePicker(
@@ -41,12 +52,19 @@ class _NewEventState extends State<NewEvent> {
     final enteredTitle = _titleController.text;
     final enteredAmount = int.parse(_amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
+    if (enteredTitle.isEmpty ||
+        enteredAmount <= 0 ||
+        (widget.preSelectedDate == null && _selectedDate == null)) {
       return;
     }
 
-    widget.addEvent(enteredTitle, enteredAmount, _selectedDate);
+    if (widget.preSelectedDate == null) {
+      widget.addNewDay(enteredTitle, enteredAmount, _selectedDate);
+      Navigator.of(context).pop();
+      return;
+    }
 
+    widget.addNewEvent(enteredTitle, enteredAmount, widget.preSelectedDate);
     Navigator.of(context).pop();
   }
 
@@ -68,19 +86,27 @@ class _NewEventState extends State<NewEvent> {
               onSubmitted: (_) => _submitData(),
             ),
             Row(
-              children: <Widget>[
-                Expanded(
-                  child: _selectedDate == null
-                      ? const Text("날짜가 선택되지 않았습니다.")
-                      : Text(
-                          _selectedDate.toString(),
+              children: widget.preSelectedDate == null
+                  ? <Widget>[
+                      Expanded(
+                        child: _selectedDate == null
+                            ? const Text("날짜가 선택되지 않았습니다.")
+                            : Text(
+                                _selectedDate.toString(),
+                              ),
+                      ),
+                      TextButton(
+                        child: const Text("날짜 선택"),
+                        onPressed: _presentDatePicker,
+                      )
+                    ]
+                  : <Widget>[
+                      Expanded(
+                        child: Text(
+                          DateFormat.yMd().format(widget.preSelectedDate!),
                         ),
-                ),
-                TextButton(
-                  child: const Text("날짜 선택"),
-                  onPressed: _presentDatePicker,
-                )
-              ],
+                      )
+                    ],
             ),
             ElevatedButton(
               onPressed: _submitData,

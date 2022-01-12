@@ -19,19 +19,19 @@ class _EventsScreenState extends State<EventsScreen> {
       events: [
         Event(
           id: "e11",
-          date: DateTime.now(),
+          date: DateTime(2022, 01, 01),
           amount: 11231,
           title: "",
         ),
         Event(
           id: "e12",
-          date: DateTime.now(),
+          date: DateTime(2022, 01, 01),
           amount: 11231,
           title: "",
         ),
         Event(
           id: "e13",
-          date: DateTime.now(),
+          date: DateTime(2022, 01, 01),
           amount: 11231,
           title: "",
         ),
@@ -43,13 +43,13 @@ class _EventsScreenState extends State<EventsScreen> {
       events: [
         Event(
           id: "e21",
-          date: DateTime.now(),
+          date: DateTime(2022, 01, 02),
           amount: 11231,
           title: "second",
         ),
         Event(
           id: "e22",
-          date: DateTime.now(),
+          date: DateTime(2022, 01, 02),
           amount: 10000,
           title: "second",
         ),
@@ -61,7 +61,7 @@ class _EventsScreenState extends State<EventsScreen> {
       events: [
         Event(
           id: "e31",
-          date: DateTime.now(),
+          date: DateTime(2022, 01, 03),
           amount: 11231,
           title: "third",
         ),
@@ -70,12 +70,12 @@ class _EventsScreenState extends State<EventsScreen> {
     ),
   ];
 
-  void _addNewEvent(
+  void _addNewDayWithEvent(
     String eventTitle,
     int eventAmount,
     DateTime chosenDate,
   ) {
-    final newEvent = Day(title: "", dateTime: chosenDate, events: [
+    final newDay = Day(title: "", dateTime: chosenDate, events: [
       Event(
         amount: eventAmount,
         title: eventTitle,
@@ -85,18 +85,41 @@ class _EventsScreenState extends State<EventsScreen> {
     ]);
 
     setState(() {
-      _days.add(newEvent);
+      _days.add(newDay);
     });
   }
 
-  void _showAddNewEvent(BuildContext ctx) {
+  void _addNewEvent(
+    String eventTitle,
+    int eventAmount,
+    DateTime createdAt,
+  ) {
+    final targetDay = _days.firstWhere((day) => day.dateTime == createdAt);
+    final targetDayIndex = _days.indexOf(targetDay);
+    final newEvent = Event(
+      id: createdAt.toString(),
+      amount: eventAmount,
+      title: eventTitle,
+      date: createdAt,
+    );
+
+    targetDay.events.add(newEvent);
+
+    setState(() {
+      _days[targetDayIndex] = targetDay;
+    });
+  }
+
+  void _showAddNewEvent(BuildContext ctx, DateTime? selectedDay) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
         return GestureDetector(
           onTap: () {},
           child: NewEvent(
-            addEvent: _addNewEvent,
+            preSelectedDate: selectedDay,
+            addNewDay: _addNewDayWithEvent,
+            addNewEvent: _addNewEvent,
           ),
           behavior: HitTestBehavior.opaque,
         );
@@ -119,7 +142,7 @@ class _EventsScreenState extends State<EventsScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () => _showAddNewEvent(context),
+            onPressed: () => _showAddNewEvent(context, null),
             icon: const Icon(Icons.event),
             color: Colors.black38,
           )
@@ -134,7 +157,7 @@ class _EventsScreenState extends State<EventsScreen> {
               .map((day) => DayItem(
                     key: ValueKey(day.dateTime),
                     day: day,
-                    addDayEvent: _addNewEvent,
+                    addDayEvent: () => _showAddNewEvent(context, day.dateTime),
                   ))
               .toList(),
         ),

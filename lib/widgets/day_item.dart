@@ -44,28 +44,30 @@ class DayItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: <Widget>[
-                    Text(
-                      DateFormat.yMd().format(day.dateTime),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: const <Widget>[
-                          Icon(
-                            Icons.add,
-                            size: 10,
-                          ),
-                          Text(
-                            "이벤트 추가",
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          )
-                        ],
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        DateFormat.yMd().format(day.dateTime),
                       ),
-                    )
-                  ]),
+                      TextButton(
+                        onPressed: () => addDayEvent(),
+                        child: Row(
+                          children: const <Widget>[
+                            Icon(
+                              Icons.add,
+                              size: 10,
+                            ),
+                            Text(
+                              "이벤트 추가",
+                              style: TextStyle(
+                                fontSize: 10,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                   Text(
                     day.title,
                   ),
