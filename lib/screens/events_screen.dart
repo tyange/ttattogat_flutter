@@ -21,19 +21,19 @@ class _EventsScreenState extends State<EventsScreen> {
           id: "e11",
           date: DateTime(2022, 01, 01),
           amount: 11231,
-          title: "",
+          title: "홍콩반점",
         ),
         Event(
           id: "e12",
           date: DateTime(2022, 01, 01),
           amount: 11231,
-          title: "",
+          title: "유가네",
         ),
         Event(
           id: "e13",
           date: DateTime(2022, 01, 01),
           amount: 11231,
-          title: "",
+          title: "맥도날드",
         ),
       ],
       title: "",
@@ -45,13 +45,13 @@ class _EventsScreenState extends State<EventsScreen> {
           id: "e21",
           date: DateTime(2022, 01, 02),
           amount: 11231,
-          title: "second",
+          title: "cgv",
         ),
         Event(
           id: "e22",
           date: DateTime(2022, 01, 02),
           amount: 10000,
-          title: "second",
+          title: "씽2게더",
         ),
       ],
       title: "",
@@ -63,7 +63,79 @@ class _EventsScreenState extends State<EventsScreen> {
           id: "e31",
           date: DateTime(2022, 01, 03),
           amount: 11231,
-          title: "third",
+          title: "롯데리아",
+        ),
+      ],
+      title: "",
+    ),
+    Day(
+      dateTime: DateTime(2022, 01, 04),
+      events: [
+        Event(
+          id: "e41",
+          date: DateTime(2022, 01, 04),
+          amount: 11231,
+          title: "test",
+        ),
+      ],
+      title: "",
+    ),
+    Day(
+      dateTime: DateTime(2022, 01, 05),
+      events: [
+        Event(
+          id: "e51",
+          date: DateTime(2022, 01, 05),
+          amount: 11231,
+          title: "test",
+        ),
+      ],
+      title: "",
+    ),
+    Day(
+      dateTime: DateTime(2022, 01, 06),
+      events: [
+        Event(
+          id: "e61",
+          date: DateTime(2022, 01, 06),
+          amount: 11231,
+          title: "test",
+        ),
+      ],
+      title: "",
+    ),
+    Day(
+      dateTime: DateTime(2022, 01, 07),
+      events: [
+        Event(
+          id: "e71",
+          date: DateTime(2022, 01, 07),
+          amount: 11231,
+          title: "test",
+        ),
+      ],
+      title: "",
+    ),
+    Day(
+      dateTime: DateTime(2022, 01, 08),
+      events: [
+        Event(
+          id: "e81",
+          date: DateTime(2022, 01, 08),
+          amount: 11231,
+          title: "test",
+        ),
+      ],
+      title: "",
+    ),
+    Day(
+      dateTime: DateTime(2022, 01, 09),
+      events: [
+        Event(
+          id: "e91",
+          date: DateTime(2022, 01, 09),
+          amount: 11231,
+          title: "test",
         ),
       ],
       title: "",
