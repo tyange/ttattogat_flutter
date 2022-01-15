@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:flutter/material.dart';
-import 'package:ttattogat/models/day.dart';
+import '../models/day.dart';
+import '../widgets/event_item.dart';
 
 class DayItem extends StatefulWidget {
   final Day day;
@@ -125,16 +126,7 @@ class _DayItemState extends State<DayItem> {
                   Flexible(
                     child: Column(
                       children: widget.day.events
-                          .map(
-                            (e) => Row(
-                              children: <Widget>[
-                                Text(e.title),
-                                Text(
-                                  e.amount.toString(),
-                                ),
-                              ],
-                            ),
-                          )
+                          .map((e) => EventItem(key: ValueKey(e.id), event: e))
                           .toList(),
                     ),
                   ),
