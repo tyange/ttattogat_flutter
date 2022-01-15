@@ -124,10 +124,14 @@ class _DayItemState extends State<DayItem> {
                 ),
                 if (_showEvents)
                   Flexible(
-                    child: Column(
-                      children: widget.day.events
-                          .map((e) => EventItem(key: ValueKey(e.id), event: e))
-                          .toList(),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: widget.day.events
+                            .map(
+                                (e) => EventItem(key: ValueKey(e.id), event: e))
+                            .toList(),
+                      ),
                     ),
                   ),
               ],
