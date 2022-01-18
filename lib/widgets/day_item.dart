@@ -7,9 +7,14 @@ import '../widgets/event_item.dart';
 class DayItem extends StatefulWidget {
   final Day day;
   Function addDayEvent;
+  Function removeDayEvent;
 
-  DayItem({Key? key, required this.day, required this.addDayEvent})
-      : super(key: key);
+  DayItem({
+    Key? key,
+    required this.day,
+    required this.addDayEvent,
+    required this.removeDayEvent,
+  }) : super(key: key);
 
   @override
   State<DayItem> createState() => _DayItemState();
@@ -113,6 +118,7 @@ class _DayItemState extends State<DayItem> {
                     itemBuilder: (ctx, i) => EventItem(
                       key: ValueKey(widget.day.events[i].date),
                       event: widget.day.events[i],
+                      removeEvent: widget.removeDayEvent,
                     ),
                   ),
                 ),

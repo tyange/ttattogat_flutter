@@ -199,6 +199,16 @@ class _EventsScreenState extends State<EventsScreen> {
     );
   }
 
+  void _removeEvent(DateTime createdAt, Event deletingEvent) {
+    final targetDay = _days.firstWhere((day) => day.dateTime == createdAt);
+    final targetDayIndex = _days.indexOf(targetDay);
+    targetDay.events.remove(deletingEvent);
+
+    setState(() {
+      _days[targetDayIndex] = targetDay;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -225,10 +235,10 @@ class _EventsScreenState extends State<EventsScreen> {
       body: ListView.builder(
         itemCount: _days.length,
         itemBuilder: (ctx, i) => DayItem(
-          key: ValueKey(_days[i].dateTime),
-          day: _days[i],
-          addDayEvent: () => _showAddNewEvent(ctx, _days[i].dateTime),
-        ),
+            key: ValueKey(_days[i].dateTime),
+            day: _days[i],
+            addDayEvent: () => _showAddNewEvent(ctx, _days[i].dateTime),
+            removeDayEvent: _removeEvent),
       ),
     );
   }

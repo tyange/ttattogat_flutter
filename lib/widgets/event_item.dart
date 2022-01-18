@@ -3,8 +3,13 @@ import 'package:ttattogat/models/event.dart';
 
 class EventItem extends StatelessWidget {
   final Event event;
+  Function removeEvent;
 
-  const EventItem({Key? key, required this.event}) : super(key: key);
+  EventItem({
+    Key? key,
+    required this.event,
+    required this.removeEvent,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +28,27 @@ class EventItem extends StatelessWidget {
         return showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Icon(Icons.delete),
-            content: Text('이벤트를 삭제하시겠어요?'),
+            title: const Icon(Icons.delete),
+            content: const Text('이벤트를 삭제하시겠어요?'),
             actions: <Widget>[
               TextButton(
-                child: Text('아뇨'),
-                onPressed: () {},
+                child: const Text('삭제할게요'),
+                onPressed: () {
+                  Navigator.of(ctx).pop(true);
+                },
               ),
               TextButton(
-                child: Text("네"),
-                onPressed: () {},
+                child: const Text("취소!"),
+                onPressed: () {
+                  Navigator.of(ctx).pop(false);
+                },
               )
             ],
           ),
         );
+      },
+      onDismissed: (direction) {
+        removeEvent(event.date, event);
       },
       child: Card(
         color: Theme.of(context).colorScheme.surface,
