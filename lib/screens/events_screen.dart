@@ -222,16 +222,12 @@ class _EventsScreenState extends State<EventsScreen> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         // shadowColor: const Color.fromRGBO(0, 0, 0, 0.5),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 30),
-        child: Column(
-          children: _days
-              .map((day) => DayItem(
-                    key: ValueKey(day.dateTime),
-                    day: day,
-                    addDayEvent: () => _showAddNewEvent(context, day.dateTime),
-                  ))
-              .toList(),
+      body: ListView.builder(
+        itemCount: _days.length,
+        itemBuilder: (ctx, i) => DayItem(
+          key: ValueKey(_days[i].dateTime),
+          day: _days[i],
+          addDayEvent: () => _showAddNewEvent(ctx, _days[i].dateTime),
         ),
       ),
     );
