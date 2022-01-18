@@ -39,6 +39,7 @@ class EventItem extends StatelessWidget {
         );
       },
       child: Card(
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

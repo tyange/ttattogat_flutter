@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
                 background: Colors.white,
               )
               .copyWith(
-                surface: Colors.grey[100],
+                // color name: cosmic latte
+                surface: const Color(0xfffff8e7),
               ),
           // Define the default font family.
           fontFamily: 'Pretendard',
