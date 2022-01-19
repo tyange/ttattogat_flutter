@@ -15,7 +15,8 @@ class EventItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(EventDetailScreen.routeName),
+      onTap: () => Navigator.of(context)
+          .pushNamed(EventDetailScreen.routeName, arguments: event),
       child: Dismissible(
         key: ValueKey(event.id),
         background: Container(
