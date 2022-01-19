@@ -18,6 +18,13 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
           "Event Detail",
         ),
       ),
+      body: Container(
+        child: Center(
+          child: Text(
+            "event detail page",
+          ),
+        ),
+      ),
     );
   }
 }
