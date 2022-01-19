@@ -5,14 +5,16 @@ import '../models/event.dart';
 import '../widgets/day_item.dart';
 import '../widgets/new_event.dart';
 
-class EventsScreen extends StatefulWidget {
-  const EventsScreen({Key? key}) : super(key: key);
+class DaysScreen extends StatefulWidget {
+  static const routeName = "/days";
+
+  const DaysScreen({Key? key}) : super(key: key);
 
   @override
-  State<EventsScreen> createState() => _EventsScreenState();
+  State<DaysScreen> createState() => _DaysScreenState();
 }
 
-class _EventsScreenState extends State<EventsScreen> {
+class _DaysScreenState extends State<DaysScreen> {
   final List<Day> _days = [
     Day(
       dateTime: DateTime(2022, 01, 01),
