@@ -12,6 +12,20 @@ class EventDetailScreen extends StatefulWidget {
 }
 
 class _EventDetailScreenState extends State<EventDetailScreen> {
+  bool _isEditing = false;
+
+  void _convertEditMode() {
+    setState(() {
+      _isEditing = true;
+    });
+  }
+
+  void _cancelEditMode() {
+    setState(() {
+      _isEditing = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final event = ModalRoute.of(context)?.settings.arguments as Event;
@@ -21,58 +35,66 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
           "Event Detail",
         ),
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ListView(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    DateFormat.yMd().format(event.date),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: ListView(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  DateFormat.yMd().format(event.date),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
-                  Row(
-                    children: [
+                ),
+                Row(
+                  children: [
+                    if (!_isEditing)
                       ElevatedButton(
                         onPressed: () {},
-                        child: Text("이미지 추가하기"),
+                        child: const Text("이미지 추가하기"),
                       ),
+                    if (!_isEditing)
                       const SizedBox(
                         width: 5,
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Text("수정하기"),
-                      ),
-                    ],
+                    !_isEditing
+                        ? ElevatedButton(
+                            onPressed: _convertEditMode,
+                            child: const Text("수정하기"),
+                          )
+                        : ElevatedButton(
+                            onPressed: _cancelEditMode,
+                            child: const Text("취소"),
+                            style: ElevatedButton.styleFrom(
+                              primary: Theme.of(context).errorColor,
+                            ),
+                          ),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 50),
+            Card(
+                child: SizedBox(
+              width: 100,
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  Text(
+                    "이미지를 추가해보세요.",
                   )
                 ],
               ),
-              SizedBox(height: 50),
-              Card(
-                  child: Container(
-                width: 100,
-                height: 200,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "이미지를 추가해보세요.",
-                    )
-                  ],
-                ),
-              )),
-              SizedBox(height: 50),
-              Text(event.title),
-              SizedBox(height: 50),
-              Text(event.amount.toString()),
-            ],
-          ),
+            )),
+            const SizedBox(height: 50),
+            Text(event.title),
+            const SizedBox(height: 50),
+            Text(event.amount.toString()),
+          ],
         ),
       ),
     );
