@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../models/day.dart';
+import '../models/event.dart';
 import '../widgets/event_item.dart';
 
 class DayItem extends StatefulWidget {
-  final Day day;
+  final DateTime date;
+  final List<Event> events;
   Function addDayEvent;
   Function removeDayEvent;
 
   DayItem({
     Key? key,
-    required this.day,
+    required this.date,
+    required this.events,
     required this.addDayEvent,
     required this.removeDayEvent,
   }) : super(key: key);
@@ -51,7 +53,7 @@ class _DayItemState extends State<DayItem> {
                     Row(
                       children: <Widget>[
                         Text(
-                          DateFormat.yMd().format(widget.day.dateTime),
+                          DateFormat.yMd().format(widget.date),
                         ),
                         TextButton(
                           onPressed: () => widget.addDayEvent(),
@@ -72,9 +74,6 @@ class _DayItemState extends State<DayItem> {
                         )
                       ],
                     ),
-                    Text(
-                      widget.day.title,
-                    ),
                   ],
                 ),
               ),
@@ -85,7 +84,7 @@ class _DayItemState extends State<DayItem> {
                 ),
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                  '₩ ${widget.day.events.fold(0, (int previousValue, element) => previousValue + element.amount)}',
+                  '₩ ${widget.events.fold(0, (int previousValue, element) => previousValue + element.amount)}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
@@ -114,10 +113,10 @@ class _DayItemState extends State<DayItem> {
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: widget.day.events.length,
+                    itemCount: widget.events.length,
                     itemBuilder: (ctx, i) => EventItem(
-                      key: ValueKey(widget.day.events[i].date),
-                      event: widget.day.events[i],
+                      key: ValueKey(widget.events[i].date),
+                      event: widget.events[i],
                       removeEvent: widget.removeDayEvent,
                     ),
                   ),

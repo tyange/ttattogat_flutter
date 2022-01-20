@@ -59,7 +59,8 @@ class _NewEventState extends State<NewEvent> {
     }
 
     if (widget.preSelectedDate == null) {
-      widget.addNewDay(enteredTitle, enteredAmount, _selectedDate);
+      widget.addNewDay(_selectedDate);
+      widget.addNewEvent(enteredTitle, enteredAmount, _selectedDate);
       Navigator.of(context).pop();
       return;
     }

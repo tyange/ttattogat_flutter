@@ -18,145 +18,114 @@ class _DaysScreenState extends State<DaysScreen> {
   final List<Day> _days = [
     Day(
       dateTime: DateTime(2022, 01, 01),
-      events: [
-        Event(
-          id: "e11",
-          date: DateTime(2022, 01, 01),
-          amount: 11231,
-          title: "홍콩반점",
-        ),
-        Event(
-          id: "e12",
-          date: DateTime(2022, 01, 01),
-          amount: 11231,
-          title: "유가네",
-        ),
-        Event(
-          id: "e13",
-          date: DateTime(2022, 01, 01),
-          amount: 11231,
-          title: "맥도날드",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 02),
-      events: [
-        Event(
-          id: "e21",
-          date: DateTime(2022, 01, 02),
-          amount: 11231,
-          title: "cgv",
-        ),
-        Event(
-          id: "e22",
-          date: DateTime(2022, 01, 02),
-          amount: 10000,
-          title: "씽2게더",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 03),
-      events: [
-        Event(
-          id: "e31",
-          date: DateTime(2022, 01, 03),
-          amount: 11231,
-          title: "롯데리아",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 04),
-      events: [
-        Event(
-          id: "e41",
-          date: DateTime(2022, 01, 04),
-          amount: 11231,
-          title: "test",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 05),
-      events: [
-        Event(
-          id: "e51",
-          date: DateTime(2022, 01, 05),
-          amount: 11231,
-          title: "test",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 06),
-      events: [
-        Event(
-          id: "e61",
-          date: DateTime(2022, 01, 06),
-          amount: 11231,
-          title: "test",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 07),
-      events: [
-        Event(
-          id: "e71",
-          date: DateTime(2022, 01, 07),
-          amount: 11231,
-          title: "test",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 08),
-      events: [
-        Event(
-          id: "e81",
-          date: DateTime(2022, 01, 08),
-          amount: 11231,
-          title: "test",
-        ),
-      ],
-      title: "",
     ),
     Day(
       dateTime: DateTime(2022, 01, 09),
-      events: [
-        Event(
-          id: "e91",
-          date: DateTime(2022, 01, 09),
-          amount: 11231,
-          title: "test",
-        ),
-      ],
-      title: "",
     ),
   ];
 
-  void _addNewDayWithEvent(
-    String eventTitle,
-    int eventAmount,
+  final List<Event> _events = [
+    Event(
+      id: "e11",
+      date: DateTime(2022, 01, 01),
+      amount: 11231,
+      title: "홍콩반점",
+    ),
+    Event(
+      id: "e12",
+      date: DateTime(2022, 01, 01),
+      amount: 11231,
+      title: "유가네",
+    ),
+    Event(
+      id: "e13",
+      date: DateTime(2022, 01, 01),
+      amount: 11231,
+      title: "맥도날드",
+    ),
+    Event(
+      id: "e21",
+      date: DateTime(2022, 01, 02),
+      amount: 11231,
+      title: "cgv",
+    ),
+    Event(
+      id: "e22",
+      date: DateTime(2022, 01, 02),
+      amount: 10000,
+      title: "씽2게더",
+    ),
+    Event(
+      id: "e31",
+      date: DateTime(2022, 01, 03),
+      amount: 11231,
+      title: "롯데리아",
+    ),
+    Event(
+      id: "e41",
+      date: DateTime(2022, 01, 04),
+      amount: 11231,
+      title: "test",
+    ),
+    Event(
+      id: "e51",
+      date: DateTime(2022, 01, 05),
+      amount: 11231,
+      title: "test",
+    ),
+    Event(
+      id: "e61",
+      date: DateTime(2022, 01, 06),
+      amount: 11231,
+      title: "test",
+    ),
+    Event(
+      id: "e71",
+      date: DateTime(2022, 01, 07),
+      amount: 11231,
+      title: "test",
+    ),
+    Event(
+      id: "e81",
+      date: DateTime(2022, 01, 08),
+      amount: 11231,
+      title: "test",
+    ),
+    Event(
+      id: "e91",
+      date: DateTime(2022, 01, 09),
+      amount: 11231,
+      title: "test",
+    ),
+  ];
+
+  void _addNewDay(
     DateTime chosenDate,
   ) {
-    final newDay = Day(title: "", dateTime: chosenDate, events: [
-      Event(
-        amount: eventAmount,
-        title: eventTitle,
-        date: chosenDate,
-        id: DateTime.now().toString(),
-      )
-    ]);
+    final newDay = Day(
+      dateTime: chosenDate,
+    );
 
     setState(() {
       _days.add(newDay);
@@ -168,23 +137,22 @@ class _DaysScreenState extends State<DaysScreen> {
     int eventAmount,
     DateTime createdAt,
   ) {
-    final targetDay = _days.firstWhere((day) => day.dateTime == createdAt);
-    final targetDayIndex = _days.indexOf(targetDay);
     final newEvent = Event(
-      id: createdAt.toString(),
+      id: DateTime.now().toString(),
       amount: eventAmount,
       title: eventTitle,
       date: createdAt,
     );
 
-    targetDay.events.add(newEvent);
-
     setState(() {
-      _days[targetDayIndex] = targetDay;
+      _events.add(newEvent);
     });
   }
 
-  void _showAddNewEvent(BuildContext ctx, DateTime? selectedDay) {
+  void _showAddNewEvent(
+    BuildContext ctx,
+    DateTime? selectedDay,
+  ) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
@@ -192,7 +160,7 @@ class _DaysScreenState extends State<DaysScreen> {
           onTap: () {},
           child: NewEvent(
             preSelectedDate: selectedDay,
-            addNewDay: _addNewDayWithEvent,
+            addNewDay: _addNewDay,
             addNewEvent: _addNewEvent,
           ),
           behavior: HitTestBehavior.opaque,
@@ -201,13 +169,9 @@ class _DaysScreenState extends State<DaysScreen> {
     );
   }
 
-  void _removeEvent(DateTime createdAt, Event deletingEvent) {
-    final targetDay = _days.firstWhere((day) => day.dateTime == createdAt);
-    final targetDayIndex = _days.indexOf(targetDay);
-    targetDay.events.remove(deletingEvent);
-
+  void _removeEvent(String eventId) {
     setState(() {
-      _days[targetDayIndex] = targetDay;
+      _events.removeWhere((event) => event.id == eventId);
     });
   }
 
@@ -238,7 +202,10 @@ class _DaysScreenState extends State<DaysScreen> {
         itemCount: _days.length,
         itemBuilder: (ctx, i) => DayItem(
             key: ValueKey(_days[i].dateTime),
-            day: _days[i],
+            date: _days[i].dateTime,
+            events: _events
+                .where((event) => event.date == _days[i].dateTime)
+                .toList(),
             addDayEvent: () => _showAddNewEvent(ctx, _days[i].dateTime),
             removeDayEvent: _removeEvent),
       ),
