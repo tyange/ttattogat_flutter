@@ -28,20 +28,20 @@ class MyApp extends StatelessWidget {
               // color name: cosmic latte
               surface: const Color(0xfffff8e7),
             ),
-        fontFamily: 'Pretendard',
+        fontFamily: 'SUIT',
         textTheme: const TextTheme(
           headline6: TextStyle(
-            fontFamily: 'Gowun Dodum',
+            fontFamily: 'SUIT',
             color: Colors.black,
             fontSize: 20,
           ),
           bodyText1: TextStyle(
-            fontFamily: 'Pretendard',
+            fontFamily: 'SUIT',
             color: Colors.black87,
             fontSize: 16,
           ),
           bodyText2: TextStyle(
-            fontFamily: 'Pretendard',
+            fontFamily: 'SUIT',
             color: Colors.black87,
             fontSize: 14,
           ),

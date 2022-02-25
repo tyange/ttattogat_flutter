@@ -93,6 +93,11 @@ flutter:
         - asset: assets/fonts/Pretendard-Light.otf
         - asset: assets/fonts/Pretendard-Regular.otf
         - asset: assets/fonts/Pretendard-Bold.otf
+    - family: SUIT
+      fonts:
+        - asset: assets/fonts/SUIT-Light.otf
+        - asset: assets/fonts/SUIT-Regular.otf
+        - asset: assets/fonts/SUIT-Bold.otf
     - family: Himnae
       fonts:
         - asset: assets/fonts/Nanum-Himnae.ttf
