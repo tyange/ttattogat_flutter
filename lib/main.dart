@@ -10,13 +10,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '따로또같이',
       theme: ThemeData(
-        // Define the default brightness and colors.
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.green,
         )
@@ -30,10 +28,7 @@ class MyApp extends StatelessWidget {
               // color name: cosmic latte
               surface: const Color(0xfffff8e7),
             ),
-        // Define the default font family.
         fontFamily: 'Pretendard',
-        // Define the default `TextTheme`. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
         textTheme: const TextTheme(
           headline6: TextStyle(
             fontFamily: 'Gowun Dodum',
